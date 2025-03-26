@@ -11,6 +11,14 @@ A simple and intuitive To-Do app built with Flutter that allows users to add, ch
 
 ## Screenshots
 
+<p>
+  <img src="assets/screenshots/homescreen.jpeg" width="200">
+  <img src="assets/screenshots/add_task.jpeg" width="200">
+  <img src="assets/screenshots/tasks.jpeg" width="200">
+  <img src="assets/screenshots/delete_task.jpeg" width="200">
+</p>
+
+
 ## Android Release
 
 - For Android users, you can download the APK file from the [Releases](https://github.com/chinni-03/todo_list/releases) section and install it on your device.
