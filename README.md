@@ -13,7 +13,7 @@ A simple and intuitive To-Do app built with Flutter that allows users to add, ch
 
 ## Android Release
 
-- For Android users, you can download the APK file from the [Releases](https://github.com/your-username/todo_app/releases) section and install it on your device.
+- For Android users, you can download the APK file from the [Releases](https://github.com/chinni-03/todo_list/releases) section and install it on your device.
 
 If you want to run the app on an emulator or are an iOS user, follow the installation procedure given below.
 
