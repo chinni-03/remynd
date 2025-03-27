@@ -36,7 +36,7 @@ Ensure you have Flutter installed on your system.
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/your-username/todo_app.git
+git clone https://github.com/chinni-03/todo_app.git
 cd todo_app
 ```
 
