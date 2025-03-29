@@ -36,8 +36,8 @@ Ensure you have Flutter installed on your system.
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/chinni-03/todo_app.git
-cd todo_app
+git clone https://github.com/chinni-03/todo_list.git
+cd todo_list
 ```
 
 ### Install Dependencies
@@ -72,7 +72,7 @@ Since iOS development requires macOS, follow these steps to build the iOS app:
 
 1. Navigate to the project directory:
    ```sh
-   cd todo_app
+   cd todo_list
    ```
 2. Ensure dependencies are up to date:
    ```sh
