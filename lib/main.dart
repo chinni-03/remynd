@@ -28,6 +28,7 @@ class MainApp extends StatelessWidget {
             color: Colors.black,
             fontSize: 24,
           ),
+          iconTheme: IconThemeData(color: Colors.black),
         ),
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,

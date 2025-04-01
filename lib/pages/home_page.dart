@@ -5,19 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_app/data/database.dart';
-import 'package:todo_app/utils/dialog_box.dart';
+import 'package:todo_app/utils/filter_dialog_box.dart';
+import 'package:todo_app/utils/new_task_dialog_box.dart';
 import 'package:todo_app/utils/todo_tile.dart';
 
 class CustomBottomBar extends StatelessWidget {
   final VoidCallback onCreateTask;
   final bool isDarkMode;
   final VoidCallback changeTheme;
+  final VoidCallback filterTasks;
 
   const CustomBottomBar({
     super.key,
     required this.onCreateTask,
     required this.isDarkMode,
     required this.changeTheme,
+    required this.filterTasks,
   });
 
   @override
@@ -44,12 +47,13 @@ class CustomBottomBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: filterTasks,
                     icon: FaIcon(
                       FontAwesomeIcons.sliders,
                       size: 24,
                       color: isDarkMode ? Colors.white : Colors.black,
                     ),
+                    highlightColor: Colors.transparent,
                   ),
                 ),
                 SizedBox(
@@ -85,6 +89,7 @@ class CustomBottomBar extends StatelessWidget {
                       size: 24,
                       color: isDarkMode ? Colors.white : Colors.black,
                     ),
+                    highlightColor: Colors.transparent,
                   ),
                 ),
               ],
@@ -108,11 +113,13 @@ class _HomePageState extends State<HomePage> {
   final _myBox = Hive.box('mybox');
   TodoDatabase db = TodoDatabase();
   bool isDarkMode = false;
+  String filterType = "All";
 
   @override
   void initState() {
     // first time ever opening the app
     isDarkMode = _myBox.get('DARKMODE', defaultValue: false);
+    filterType = "All tasks";
     if (_myBox.get("TODOLIST") == null) {
       db.createInitialData();
     } else {
@@ -152,6 +159,7 @@ class _HomePageState extends State<HomePage> {
             _controller.clear();
             Navigator.of(context).pop();
           },
+          isDarkMode: isDarkMode,
         );
       },
     );
@@ -171,14 +179,44 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void filterTasks() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return FilterDialogBox(
+          onSelectFilter: (selectedFilter) {
+            setState(() {
+              filterType = selectedFilter;
+            });
+            Navigator.of(context).pop();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              setState(() {});
+            });
+          },
+          isDarkMode: isDarkMode,
+          currentFilter: filterType,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    List filteredTasks =
+        db.todoList.where((task) {
+          if (filterType == "All tasks") return true;
+          if (filterType == "Completed tasks") return task[1] == true;
+          if (filterType == "Pending tasks") return task[1] == false;
+          return true;
+        }).toList();
+
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black87 : Colors.grey[100],
       bottomNavigationBar: CustomBottomBar(
         onCreateTask: createNewTask,
         isDarkMode: isDarkMode,
         changeTheme: changeTheme,
+        filterTasks: filterTasks,
       ),
       body: SafeArea(
         child: Padding(
@@ -189,30 +227,41 @@ class _HomePageState extends State<HomePage> {
             left: 16.0,
           ),
           child:
-              db.todoList.isEmpty
+              filteredTasks.isEmpty
                   ? Column(
                     children: [
                       const SizedBox(height: 32),
                       Center(
                         child: Text(
-                          "No tasks added yet!",
+                          filterType == "Pending tasks"
+                              ? "Hooray! No tasks pending!"
+                              : filterType == "Completed tasks"
+                              ? "No tasks completed yet! Let's get to work now!"
+                              : "No tasks added yet!",
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.grey[700],
+                            color:
+                                isDarkMode ? Colors.white60 : Colors.grey[700],
                           ),
+                          softWrap: true,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ],
                   )
                   : ListView.builder(
-                    itemCount: db.todoList.length,
+                    itemCount: filteredTasks.length,
                     itemBuilder: (context, index) {
+                      int originalIndex = db.todoList.indexOf(
+                        filteredTasks[index],
+                      );
                       return TodoTile(
                         key: ValueKey(index),
-                        taskName: db.todoList[index][0],
-                        taskCompleted: db.todoList[index][1],
-                        onChanged: (value) => checkboxChanged(value, index),
-                        deleteFunction: () => deleteTask(index),
+                        taskName: filteredTasks[index][0],
+                        taskCompleted: filteredTasks[index][1],
+                        onChanged:
+                            (value) => checkboxChanged(value, originalIndex),
+                        deleteFunction: () => deleteTask(originalIndex),
                         isDarkMode: isDarkMode,
                       );
                     },
