@@ -36,6 +36,7 @@ class Button extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width * 0.3,
         onPressed: onPressed,
         textColor: getTextColor(buttonName),
         child: Text(buttonName),
