@@ -1,5 +1,5 @@
-# Remynd: A To-Do App
-A simple and efficient To-Do app built with Flutter, allowing users to manage their tasks seamlessly with an improved user experience.
+# Remynd
+A simple and efficient task management app built with Flutter, allowing users to manage their tasks seamlessly with an improved user experience.
 
 ## Features
 📌 **Add Tasks** – Quickly add new tasks to your list.  
@@ -36,8 +36,8 @@ Follow the [Flutter installation guide](https://flutter.dev/docs/get-started/ins
 
 ### Clone the Repository
 ```sh
-git clone https://github.com/chinni-03/todo_app.git
-cd todo_app
+git clone https://github.com/chinni-03/remynd.git
+cd remynd
 ```
 
 ### Install Dependencies
@@ -66,7 +66,7 @@ Since iOS development requires macOS, follow these steps:
 
 ### Build the iOS App
 ```sh
-cd todo_app
+cd remynd
 flutter pub get
 cd ios
 pod install
@@ -83,7 +83,7 @@ flutter build apk --release
 The APK will be found at: `build/app/outputs/flutter-apk/app-release.apk`
 
 ## Usage
-1. Open the app.
+1. Open **Remynd**.
 2. Add a task by tapping the **+** button.
 3. Mark tasks as completed using the checkbox.
 4. Delete tasks by swiping more than 25% to the left.
