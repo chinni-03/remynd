@@ -29,7 +29,7 @@ class DialogBox extends StatelessWidget {
             TextField(
               controller: controller,
               cursorColor: isDarkMode ? Colors.white70 : Colors.grey,
-              style: TextStyle(color: isDarkMode ? Colors.white : Colors.grey),
+              style: TextStyle(color: isDarkMode ? Colors.white : Colors.grey[800]),
               decoration: InputDecoration(
                 border: UnderlineInputBorder(),
                 enabledBorder: UnderlineInputBorder(

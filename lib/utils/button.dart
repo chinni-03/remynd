@@ -26,9 +26,9 @@ class Button extends StatelessWidget {
   Color getTextColor(String buttonName) {
     switch (buttonName.toLowerCase()) {
       case "add task":
-        return isDarkMode ? Colors.black : Colors.grey;
+        return isDarkMode ? Colors.black : Colors.white;
       case "cancel":
-        return isDarkMode ? Colors.white : Colors.grey;
+        return isDarkMode ? Colors.white : Colors.black;
       default:
         return isDarkMode ? Colors.white : Colors.grey;
     }
