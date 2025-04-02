@@ -67,6 +67,7 @@ class TodoTile extends StatelessWidget {
                         taskCompleted
                             ? TextDecoration.lineThrough
                             : TextDecoration.none,
+                    decorationColor: isDarkMode ? Colors.white : Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: isDarkMode ? Colors.white : Colors.black,

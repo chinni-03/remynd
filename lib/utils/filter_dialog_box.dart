@@ -35,6 +35,13 @@ class _FilterDialogBoxState extends State<FilterDialogBox> {
     });
   }
 
+  void updateFilter(String value) {
+    setState(() {
+      selectedFilter = value;
+    });
+    widget.onSelectFilter(selectedFilter);
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -50,85 +57,79 @@ class _FilterDialogBoxState extends State<FilterDialogBox> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "All tasks",
-                  style: TextStyle(
-                    color: widget.isDarkMode ? Colors.white : Colors.black,
+          InkWell(
+            onTap: () => updateFilter("All tasks"),
+            child: ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "All tasks",
+                    style: TextStyle(
+                      color: widget.isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
-                ),
-                Radio<String>(
-                  value: "All tasks",
-                  groupValue: selectedFilter,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedFilter = value!;
-                    });
-                    widget.onSelectFilter(selectedFilter);
-                  },
-                  activeColor:
-                      widget.isDarkMode ? Colors.white : Colors.grey[800],
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  fillColor: getRadioFillColor(),
-                ),
-              ],
+                  Radio<String>(
+                    value: "All tasks",
+                    groupValue: selectedFilter,
+                    onChanged: (value) => updateFilter(value!),
+                    activeColor:
+                        widget.isDarkMode ? Colors.white : Colors.grey[800],
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    fillColor: getRadioFillColor(),
+                  ),
+                ],
+              ),
             ),
           ),
-          ListTile(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Completed tasks",
-                  style: TextStyle(
-                    color: widget.isDarkMode ? Colors.white : Colors.black,
+          InkWell(
+            onTap: () => updateFilter("Completed tasks"),
+            child: ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Completed tasks",
+                    style: TextStyle(
+                      color: widget.isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
-                ),
-                Radio<String>(
-                  value: "Completed tasks",
-                  groupValue: selectedFilter,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedFilter = value!;
-                    });
-                    widget.onSelectFilter(selectedFilter);
-                  },
-                  activeColor:
-                      widget.isDarkMode ? Colors.white : Colors.grey[800],
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  fillColor: getRadioFillColor(),
-                ),
-              ],
+                  Radio<String>(
+                    value: "Completed tasks",
+                    groupValue: selectedFilter,
+                    onChanged: (value) => updateFilter(value!),
+                    activeColor:
+                        widget.isDarkMode ? Colors.white : Colors.grey[800],
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    fillColor: getRadioFillColor(),
+                  ),
+                ],
+              ),
             ),
           ),
-          ListTile(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Pending tasks",
-                  style: TextStyle(
-                    color: widget.isDarkMode ? Colors.white : Colors.black,
+          InkWell(
+            onTap: () => updateFilter("Pending tasks"),
+            child: ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Pending tasks",
+                    style: TextStyle(
+                      color: widget.isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
-                ),
-                Radio<String>(
-                  value: "Pending tasks",
-                  groupValue: selectedFilter,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedFilter = value!;
-                    });
-                    widget.onSelectFilter(selectedFilter);
-                  },
-                  activeColor:
-                      widget.isDarkMode ? Colors.white : Colors.grey[800],
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  fillColor: getRadioFillColor(),
-                ),
-              ],
+                  Radio<String>(
+                    value: "Pending tasks",
+                    groupValue: selectedFilter,
+                    onChanged: (value) => updateFilter(value!),
+                    activeColor:
+                        widget.isDarkMode ? Colors.white : Colors.grey[800],
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    fillColor: getRadioFillColor(),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
