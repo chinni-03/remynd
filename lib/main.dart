@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_app/pages/home_page.dart';
 
 void main() async {
-
   await Hive.initFlutter();
 
   // open a box
@@ -29,7 +28,12 @@ class MainApp extends StatelessWidget {
             color: Colors.black,
             fontSize: 24,
           ),
+          iconTheme: IconThemeData(color: Colors.black),
         ),
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        useMaterial3: true,
       ),
     );
   }
